@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Processing Progress</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow">
+        <h1 class="text-xl font-bold mb-4">Processing Video</h1>
+        
+        <div class="mb-4">
+            <div class="w-full bg-gray-200 rounded-full h-4">
+                <div id="progressBar" 
+                     class="bg-orange-500 h-4 rounded-full" 
+                     style="width: {{ progress }}%"></div>
+            </div>
+            <p id="progressText" class="text-center mt-2">{{ progress }}%</p>
+        </div>
+
+        <div id="statusMessage" class="text-center py-2"></div>
+
+        <script>
+            function checkProgress() {
+                fetch('/progress')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('progressBar').style.width = data.progress + '%';
+                        document.getElementById('progressText').textContent = data.progress + '%';
+                        
+                        if (data.done) {
+                            document.getElementById('statusMessage').innerHTML = 
+                                '<p class="text-green-500">Processing complete!</p>';
+                            setTimeout(() => {
+                                window.location.href = '/results';
+                            }, 1500);
+                        } else {
+                            setTimeout(checkProgress, 1000);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        setTimeout(checkProgress, 1000);
+                    });
+            }
+            
+            // Start checking progress when page loads
+            document.addEventListener('DOMContentLoaded', checkProgress);
+        </script>
+    </div>
+</body>
+</html>

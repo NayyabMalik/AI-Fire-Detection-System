@@ -1,0 +1,253 @@
+/* static/css/upload.css */
+
+/* ================ Base Styles ================ */
+:root {
+  --dark-maroon: #3B0A2E;
+  --rich-plum: #5A0A47;
+  --deep-magenta: #7A0E60;
+  --vibrant-fuchsia: #A4167A;
+  --fire-orange: #FF4500;
+  --fire-yellow: #FF8C00;
+  --fire-red: #FF2400;
+  --dark-bg: #1a0a15;
+}
+
+/* ================ Animations ================ */
+@keyframes fire-flicker {
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 69, 0, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(255, 69, 0, 0.6); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+/* ================ Upload Page Styles ================ */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, var(--dark-maroon) 0%, var(--deep-magenta) 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  color: white;
+}
+
+.upload-container {
+  background: rgba(26, 10, 21, 0.8);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--vibrant-fuchsia);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.upload-title {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.upload-title::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(to right, var(--fire-orange), var(--fire-yellow));
+  margin: 0.8rem auto 0;
+  border-radius: 2px;
+}
+
+.file-input-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.file-input-label {
+  display: block;
+  padding: 1.5rem;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.file-input-label:hover {
+  border-color: var(--fire-orange);
+  background: rgba(255, 69, 0, 0.05);
+}
+
+.file-input-label i {
+  font-size: 2.5rem;
+  color: var(--fire-orange);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.file-input-label p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.file-input-label span {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+#videoFile {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.upload-button {
+  background: linear-gradient(to right, var(--vibrant-fuchsia), var(--fire-orange));
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+}
+
+.upload-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.upload-button:hover::before {
+  left: 100%;
+}
+
+#progressContainer {
+  margin-top: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--fire-orange);
+  animation: fire-flicker 3s infinite;
+}
+
+.progress-text {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#progressBar {
+  height: 100%;
+  background: linear-gradient(to right, var(--fire-orange), var(--fire-yellow));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.logout-link {
+  margin-top: 2rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.logout-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--fire-yellow);
+  transition: width 0.3s ease;
+}
+
+.logout-link:hover {
+  color: white;
+}
+
+.logout-link:hover::after {
+  width: 100%;
+}
+
+/* Preview Section */
+.video-preview {
+  margin-top: 1.5rem;
+  display: none;
+}
+
+.video-preview video {
+  width: 100%;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Results Section (for later) */
+.results-section {
+  margin-top: 2rem;
+  display: none;
+}
+
+/* ================ Responsive Design ================ */
+@media (max-width: 640px) {
+  .upload-container {
+    padding: 1.5rem;
+  }
+  
+  .upload-title {
+    font-size: 1.8rem;
+  }
+  
+  .file-input-label {
+    padding: 1rem;
+  }
+}
+
+/* Fire Particles */
+.fire-particle {
+  position: fixed;
+  border-radius: 50%;
+  z-index: -1;
+  animation: float 6s ease-in-out infinite;
+}

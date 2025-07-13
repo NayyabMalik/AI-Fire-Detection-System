@@ -1,0 +1,56 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video - FireWatch AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
+</head>
+<body class="animate__animated animate__fadeIn">
+    <div class="fire-particle" style="top:20%; left:15%; width:4px; height:4px; background-color:#FF4500; animation-delay:0s;"></div>
+    <div class="fire-particle" style="top:40%; left:80%; width:3px; height:3px; background-color:#FF8C00; animation-delay:1s;"></div>
+    <div class="fire-particle" style="top:70%; left:25%; width:5px; height:5px; background-color:#A4167A; animation-delay:2s;"></div>
+
+    <div class="upload-container animate__animated animate__fadeInUp">
+        <h1 class="upload-title">Fire Detection Analysis</h1>
+        
+        <div class="file-input-container">
+            <label for="videoFile" class="file-input-label">
+                <i class="fas fa-video"></i>
+                <p>Select a video file</p>
+                <span>MP4, MOV, or AVI</span>
+            </label>
+            <input type="file" id="videoFile" accept="video/*">
+        </div>
+        
+        <button id="uploadBtn" class="upload-button animate__animated animate__pulse animate__infinite animate__slower">
+            <i class="fas fa-fire mr-2"></i> Analyze for Fire
+        </button>
+        
+        <div class="video-preview" id="videoPreview">
+            <video controls id="previewPlayer"></video>
+        </div>
+        
+        <div id="progressContainer" class="hidden">
+            <p class="progress-text">Processing video for fire detection...</p>
+            <div class="progress-bar-container">
+                <div id="progressBar" style="width: 0%"></div>
+            </div>
+        </div>
+        
+        <div class="results-section hidden" id="resultsSection">
+        </div>
+    </div>
+    
+    <a href="{{ url_for('logout') }}" class="logout-link">
+        <i class="fas fa-sign-out-alt mr-2"></i> Logout
+    </a>
+
+    <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+</body>
+</html> 
+

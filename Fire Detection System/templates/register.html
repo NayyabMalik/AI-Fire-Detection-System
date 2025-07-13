@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - FireWatch AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+</head>
+<body class="animate__animated animate__fadeIn">
+    <!-- Animated Background Particles -->
+    <div class="fire-particles">
+        <div class="fire-particle" style="top:20%; left:15%; width:4px; height:4px; background-color:#FF4500; animation-duration:8s;"></div>
+        <div class="fire-particle" style="top:40%; left:80%; width:3px; height:3px; background-color:#FF8C00; animation-duration:10s;"></div>
+        <div class="fire-particle" style="top:75%; left:25%; width:5px; height:5px; background-color:#A4167A; animation-duration:12s;"></div>
+    </div>
+
+    <div class="register-container animate__animated animate__fadeInUp">
+        <h1 class="register-title">Create Account</h1>
+        
+        {% if error %}
+            <div class="error-message animate__animated animate__headShake">
+                {{ error }}
+            </div>
+        {% endif %}
+        
+        <form method="POST" class="register-form">
+            <div class="form-group">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-input" placeholder="Choose a username" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-input" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group password-container">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-input" placeholder="Create a password" required minlength="6">
+                <div class="strength-indicator"></div>
+                <div class="password-strength"></div>
+            </div>
+            
+            <button type="submit" class="register-button animate__animated animate__pulse animate__infinite animate__slower">
+                Register 🔥
+            </button>
+        </form>
+        
+        <p class="login-link">
+            Already have an account? <a href="{{ url_for('login') }}">Login here</a>
+        </p>
+    </div>
+</body>
+</html>

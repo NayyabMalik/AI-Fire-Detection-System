@@ -1,0 +1,276 @@
+/* static/css/register.css */
+
+/* ================ Base Styles ================ */
+:root {
+  --dark-maroon: #3B0A2E;
+  --rich-plum: #5A0A47;
+  --deep-magenta: #7A0E60;
+  --vibrant-fuchsia: #A4167A;
+  --fire-orange: #FF4500;
+  --fire-yellow: #FF8C00;
+  --fire-red: #FF2400;
+  --dark-bg: #1a0a15;
+}
+
+/* ================ Animations ================ */
+@keyframes fire-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 69, 0, 0.3); }
+  50% { transform: scale(1.02); box-shadow: 0 0 20px rgba(255, 69, 0, 0.6); }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes input-glow {
+  0%, 100% { border-color: rgba(255, 255, 255, 0.2); }
+  50% { border-color: var(--fire-orange); }
+}
+
+/* ================ Register Page Styles ================ */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, var(--dark-maroon) 0%, var(--deep-magenta) 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.register-container {
+  background: rgba(26, 10, 21, 0.8);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--vibrant-fuchsia);
+  animation: float-up 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(164,22,122,0.1) 0%, rgba(164,22,122,0) 70%);
+  animation: rotate 20s linear infinite;
+  z-index: -1;
+}
+
+.register-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.register-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, var(--fire-orange), var(--fire-yellow));
+  margin: 0.8rem auto 0;
+  border-radius: 2px;
+}
+
+.error-message {
+  background: rgba(255, 69, 0, 0.2);
+  color: white;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--fire-red);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  animation: fire-pulse 3s infinite;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-label {
+  display: block;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--fire-orange);
+  box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.password-strength {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.password-strength::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--fire-red);
+  transition: width 0.3s ease;
+}
+
+.form-input:focus + .password-strength::after {
+  width: 100%;
+  background: linear-gradient(to right, var(--fire-red), var(--fire-orange), var(--fire-yellow));
+}
+
+.register-button {
+  background: linear-gradient(to right, var(--vibrant-fuchsia), var(--fire-orange));
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+}
+
+.register-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.register-button:hover::before {
+  left: 100%;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.login-link a {
+  color: var(--fire-yellow);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.login-link a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--fire-yellow);
+  transition: width 0.3s ease;
+}
+
+.login-link a:hover {
+  color: white;
+}
+
+.login-link a:hover::after {
+  width: 100%;
+}
+
+/* ================ Responsive Design ================ */
+@media (max-width: 480px) {
+  .register-container {
+    padding: 1.8rem;
+    border-radius: 12px;
+  }
+  
+  .register-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-input {
+    padding: 0.7rem;
+  }
+  
+  .register-button {
+    padding: 0.7rem;
+  }
+}
+
+/* Password Strength Indicator */
+.password-container {
+  position: relative;
+}
+
+.strength-indicator {
+  position: absolute;
+  right: 10px;
+  top: 38px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--fire-red);
+  transition: all 0.3s ease;
+}
+
+.form-input:focus ~ .strength-indicator {
+  animation: input-glow 1.5s infinite;
+}
+
+.form-input:valid ~ .strength-indicator {
+  background: var(--fire-orange);
+}
+
+.form-input:valid:focus ~ .strength-indicator {
+  background: var(--fire-yellow);
+  animation: pulse 1.5s infinite;
+}

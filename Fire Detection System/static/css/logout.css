@@ -1,0 +1,143 @@
+/* static/css/logout.css */
+
+/* ================ Base Styles ================ */
+:root {
+  --dark-maroon: #3B0A2E;
+  --rich-plum: #5A0A47;
+  --deep-magenta: #7A0E60;
+  --vibrant-fuchsia: #A4167A;
+  --fire-orange: #FF4500;
+  --fire-yellow: #FF8C00;
+  --fire-red: #FF2400;
+  --dark-bg: #1a0a15;
+}
+
+/* ================ Animations ================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes fire-glow {
+  0%, 100% { text-shadow: 0 0 10px rgba(255, 69, 0, 0.5); }
+  50% { text-shadow: 0 0 20px rgba(255, 69, 0, 0.8); }
+}
+
+/* ================ Logout Page Styles ================ */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, var(--dark-maroon) 0%, var(--deep-magenta) 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin: 0;
+  padding: 1rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.logout-container {
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  padding: 2.5rem;
+  background: rgba(26, 10, 21, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--vibrant-fuchsia);
+}
+
+.logout-icon {
+  font-size: 4rem;
+  color: var(--fire-orange);
+  margin-bottom: 1.5rem;
+  animation: fire-glow 2s infinite;
+}
+
+.logout-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, var(--fire-orange), var(--fire-yellow));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.logout-message {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.home-button {
+  display: inline-block;
+  background: linear-gradient(to right, var(--vibrant-fuchsia), var(--fire-orange));
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+  animation: pulse 2s infinite;
+}
+
+.home-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+}
+
+.home-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.home-button:hover::before {
+  left: 100%;
+}
+
+/* Fire Particles */
+.fire-particle {
+  position: fixed;
+  border-radius: 50%;
+  z-index: -1;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .logout-container {
+    padding: 1.5rem;
+  }
+  
+  .logout-title {
+    font-size: 2rem;
+  }
+  
+  .logout-icon {
+    font-size: 3rem;
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}

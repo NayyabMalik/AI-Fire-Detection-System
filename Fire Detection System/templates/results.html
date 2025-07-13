@@ -1,0 +1,57 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - FireWatch AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
+</head>
+<body>
+    <div class="results-container">
+        <h1 class="results-title animate__animated animate__fadeInDown">Fire Detection Results</h1>
+        
+        {% if clips|length == 0 %}
+            <div class="no-results animate__animated animate__fadeIn">
+                <i class="fas fa-check-circle text-4xl text-green-400 mb-3"></i>
+                <p>No fire detected in your video</p>
+                <p class="text-sm opacity-70 mt-2">The analysis didn't find any fire hazards in the uploaded footage</p>
+            </div>
+        {% else %}
+            <div class="clips-grid">
+                {% for clip in clips %}
+                    <div class="clip-card" style="animation-delay: {{ loop.index * 0.1 }}s">
+                        <div class="fire-detected">
+                            <i class="fas fa-fire mr-1"></i> Fire Detected
+                        </div>
+                        <div class="clip-header">
+                            <div class="clip-number">{{ loop.index }}</div>
+                            <div class="clip-title">Potential Fire Incident</div>
+                        </div>
+                        <video controls class="clip-video" src="{{ clip.url }}"></video>
+                        <div class="clip-footer">
+                            <div class="clip-timestamp">
+                                <i class="fas fa-clock mr-1"></i> {{ clip.timestamp }}
+                            </div>
+                            <div class="clip-confidence">
+                                Confidence: {{ clip.confidence }}%
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <div class="action-buttons">
+            <a href="{{ url_for('upload') }}" class="upload-again animate__animated animate__pulse animate__infinite animate__slower">
+                <i class="fas fa-upload mr-2"></i> Upload Another Video
+            </a>
+            <a href="{{ url_for('logout') }}" class="logout-link">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </a>
+        </div>
+    </div>
+</body>
+</html> 
